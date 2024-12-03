@@ -1,17 +1,13 @@
-import os
+
 import pandas as pd
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler  # Import the scaler
 
 def clean_data(df):
     """
     Cleans the stock price data by:
     - Removing "$" symbol from specific columns if present.
     - Renaming the "Close/Last" column to "Close".
-    
-    Parameters:
-        df (pd.DataFrame): The dataframe to be cleaned.
-    
-    Returns:
-        pd.DataFrame: The cleaned dataframe.
     """
     columns_to_clean = ['Close/Last', 'Open', 'High', 'Low']
     
@@ -26,32 +22,49 @@ def clean_data(df):
     
     return df
 
-def read_data(data_folder_path):
+def read_stock_data(file_path):
     """
-    Reads stock price CSV files from a folder and returns a dictionary with stock ticker as the key and dataframe as the value.
+    Reads and cleans stock data from a CSV file.
     
     Parameters:
-        data_folder_path (str): Path to the folder containing the CSV files.
+        file_path (str): Path to the CSV file containing stock data.
     
     Returns:
-        dict: A dictionary with stock tickers as keys and their cleaned dataframes as values.
+        pd.DataFrame: Cleaned stock data.
     """
-    stock_data = {}
-    
-    for file_name in os.listdir(data_folder_path):
-        if file_name.endswith('.csv'):
-            # Extract stock ticker from file name
-            stock_ticker = file_name.split('.')[0]
-            
-            # Read the CSV file
-            file_path = os.path.join(data_folder_path, file_name)
-            df = pd.read_csv(file_path)
-            
-            # Clean the data
-            df = clean_data(df)
-            
-            # Add to dictionary
-            stock_data[stock_ticker] = df
-    
-    return stock_data
+    df = pd.read_csv(file_path)
+    df.set_index("Date", inplace=True)
+    df = clean_data(df)
+    return df
 
+def prepare_data_for_lstm(df, sequence_length=80):
+    """
+    Prepares data for LSTM model by creating sequences from the 'Close' price.
+    Scales the data using MinMaxScaler.
+
+    Parameters:
+        df (pd.DataFrame): The cleaned stock data.
+        sequence_length (int): Length of each sequence.
+    
+    Returns:
+        np.ndarray: Processed input and output sequences for LSTM (scaled).
+        MinMaxScaler: The fitted scaler for inverse transformation later.
+    """
+    close_prices = df['Close'].values.reshape(-1, 1)
+    
+    # Apply MinMax scaling
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    scaled_close = scaler.fit_transform(close_prices)
+
+    # Create sequences of data for LSTM
+    X, y = [], []
+    for i in range(sequence_length, len(scaled_close)):
+        X.append(scaled_close[i-sequence_length:i, 0])  # Use scaled 'Close' prices directly
+        y.append(scaled_close[i, 0])  # Scaled 'Close' price for prediction
+    
+    X, y = np.array(X), np.array(y)
+    
+    # Reshape X to be 3D (samples, time steps, features) for LSTM
+    X = X.reshape(X.shape[0], X.shape[1], 1)
+    
+    return X, y, scaler
