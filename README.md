@@ -2,6 +2,52 @@
 
 This project implements a machine learning pipeline to predict stock prices using Long Short-Term Memory (LSTM) models. The pipeline includes data preprocessing, model training, evaluation, prediction, and visualization.
 
-## Project Structure
 
-stock-price-prediction/ │ ├── data/ # Folder containing raw stock price data (CSV files). │ └── AAPL.csv # Stock data for Apple (example). │ └── GOOG.csv # Stock data for Google (example). │ └── MSFT.csv # Stock data for Microsoft (example). │ └── ... │ ├── models/ # Folder to store trained LSTM models and scalers. │ └── AAPL_lstm_model.h5 # LSTM model for Apple. │ └── GOOG_lstm_model.h5 # LSTM model for Google. │ └── MSFT_lstm_model.h5 # LSTM model for Microsoft. │ └── AAPL_scaler.pkl # Scaler used for Apple data. │ └── GOOG_scaler.pkl # Scaler used for Google data. │ └── MSFT_scaler.pkl # Scaler used for Microsoft data. │ ├── plots/ # Folder to store generated plots. │ └── AAPL_train_loss_vs_val_loss.png # Train vs validation loss for Apple. │ └── GOOG_train_loss_vs_val_loss.png # Train vs validation loss for Google. │ └── MSFT_train_loss_vs_val_loss.png # Train vs validation loss for Microsoft. │ └── AAPL_actual_vs_predicted_prices.png # Actual vs predicted prices for Apple. │ └── GOOG_actual_vs_predicted_prices.png # Actual vs predicted prices for Google. │ └── MSFT_actual_vs_predicted_prices.png # Actual vs predicted prices for Microsoft. │ ├── sample_data/ # Folder containing sample stock data (can be excluded from version control). │ └── AAPL.csv # Sample stock data for testing. │ └── GOOG.csv # Sample stock data for testing. │ └── MSFT.csv # Sample stock data for testing. │ ├── pycache/ # Folder containing Python bytecode (auto-generated). │ └── ... │ ├── eda.py # Script for exploratory data analysis (EDA) on stock data. ├── inference.py # Script to predict future stock prices using a trained model. ├── display_plots.py # Script to display saved plots. ├── evaluate.py # Script to evaluate the performance of trained LSTM models. ├── model.py # Contains the architecture of the LSTM model. ├── read_data.py # Module to handle data loading and preprocessing for LSTM models. ├── train.py # Script to train the LSTM model for multiple stock tickers. ├── requirements.txt # File containing Python package dependencies. ├── LICENSE # License file (e.g., MIT License). └── README.md # Project overview and instructions (this file).
+## Folder & File Descriptions:
+
+### **`data/`**
+Contains the stock data files (`CSV` format) for different stock tickers. These data files are used to train and test the LSTM models. Each file should have the following columns: `Date`, `Open`, `Close`, `High`, `Low`, `Volume`.
+
+### **`models/`**
+Stores the trained LSTM models and the scalers (`.h5` and `.pkl` files). Each model corresponds to a stock ticker, and the scaler is used for normalizing the data.
+
+### **`plots/`**
+Contains the plots generated during the model training and evaluation process, including loss curves and actual vs predicted price plots.
+
+## Python Scripts:
+
+### **`eda.py`**
+Used for exploring and visualizing the stock data. It provides basic statistics and charts to understand the data better.
+
+### **`inference.py`**
+Script for making predictions using the trained LSTM model. It accepts the ticker symbol and the number of days to predict as command-line parameters.
+
+### **`display_plots.py`**
+Displays saved plots from the `plots/` folder. It shows the loss curves and the actual vs predicted prices.
+
+### **`evaluate.py`**
+Evaluates the performance of trained LSTM models. It computes evaluation metrics like MSE, RMSE, and MAE, and generates plots of actual vs predicted stock prices.
+
+### **`model.py`**
+Defines the architecture of the LSTM model. This is where you define the layers, activation functions, and other configurations for the neural network.
+
+### **`read_data.py`**
+Contains functions for loading the stock data and preparing it for the LSTM model. This includes handling missing data, scaling, and generating sequences for training.
+
+### **`train.py`**
+This is the main script for training the LSTM models for multiple stock tickers. It loads the stock data, builds the LSTM model using `model.py`, trains the model, and saves the models and scalers to disk.
+
+### **`requirements.txt`**
+Specifies the Python dependencies required for this project. It includes libraries like `numpy`, `pandas`, `matplotlib`, `keras`, and `tensorflow`.
+
+
+### **`README.md`**
+This file. It provides an overview of the project, describes the folder structure, and gives instructions on how to use the scripts.
+
+## Example Command Usage:
+
+### **Training the Model**: 
+To train the LSTM model for stock tickers, run the following command:
+```bash
+python train.py
+
