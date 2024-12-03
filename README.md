@@ -50,4 +50,41 @@ This file. It provides an overview of the project, describes the folder structur
 To train the LSTM model for stock tickers, run the following command:
 ```bash
 python train.py
+```
+### **Model Evaluation**:
+To evaluate the trained LSTM models, run:
+```bash
+python evaluate.py
+```
+
+### **Making Predictions:**
+To predict stock prices for the next n days, run:
+```bash
+python inference.py AAPL 10
+```
+Where AAPL is the stock ticker and 10 is the number of days to predict.
+
+### **Displaying Plots:**
+To display the saved plots, run
+```bash
+python display_plots.py
+```
+
+## Requirements
+
+This project requires Python 3 and the following packages:
+
+- `numpy`
+- `pandas`
+- `matplotlib`
+- `keras`
+- `tensorflow`
+- `joblib`
+
+You can install the required dependencies by running:
+
+```bash
+pip install -r requirements.txt
+
+
 
