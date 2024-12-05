@@ -13,7 +13,22 @@ This project implements a machine learning pipeline to predict stock prices usin
    pip install -r requirements.txt
    ```
 3. run cell in the notebook
-   
+
+## Start the Application
+1. Clone the repo
+   ```bash
+   git clone https://github.com/jahnavireddy036/stock-price-prediction.git
+   ```
+2. Install dependencies
+   ```bash
+   cd stock-price-prediction
+   pip install -r requirements.txt
+   ```
+3. Start the flask app
+   ```bash
+   python app.py
+   ```
+   Open the URL in new tab
 ## Folder & File Descriptions:
 
 ### **`data/`**
