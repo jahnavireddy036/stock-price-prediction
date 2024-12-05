@@ -2,7 +2,18 @@
 
 This project implements a machine learning pipeline to predict stock prices using Long Short-Term Memory (LSTM) models. The pipeline includes data preprocessing, model training, evaluation, prediction, and visualization.
 
-
+## Project Setup
+1. Clone the repo
+   ```bash
+   git clone https://github.com/jahnavireddy036/stock-price-prediction.git
+   ```
+2. Install dependencies
+   ```bash
+   cd stock-price-prediction
+   pip install -r requirements.txt
+   ```
+3. run cell in the notebook
+   
 ## Folder & File Descriptions:
 
 ### **`data/`**
