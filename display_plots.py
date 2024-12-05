@@ -15,7 +15,7 @@ def display_plot(plot_path):
         print(f"Plot {plot_path} does not exist.")
 
 # List of plot filenames to display 
-tickers = ['AAPL', 'GOOG', 'MSFT']  
+tickers = ['AAPL', 'AMZN', 'IBM']  
 
 # Display all the saved plots
 for ticker in tickers:
