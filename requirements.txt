@@ -1,1 +1,10 @@
-
+flask
+tensorflow
+keras
+pandas
+joblib
+plotly
+flask_sqlalchemy
+flask_bcrypt
+flask_login
+scikit-learn
