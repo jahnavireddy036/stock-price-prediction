@@ -7,7 +7,15 @@ import argparse
 
 class StockPricePredictor:
     def __init__(self, ticker, model_path, scaler_path, sequence_length=80):
-   
+        """
+        Initializes the StockPricePredictor class.
+
+        Parameters:
+            ticker (str): Stock ticker symbol (e.g. 'AAPL').
+            model_path (str): Path to the saved LSTM model.
+            scaler_path (str): Path to the saved scaler.
+            sequence_length (int): Length of the sequence for LSTM input.
+        """
         self.ticker = ticker
         self.model_path = model_path
         self.scaler_path = scaler_path
