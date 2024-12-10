@@ -1,3 +1,4 @@
+/url https://github.com/jahnavireddy036/stock-price-prediction
 # Stock Price Prediction using LSTM
 
 This project implements a machine learning pipeline to predict stock prices using Long Short-Term Memory (LSTM) models. The pipeline includes data preprocessing, model training, evaluation, prediction, and visualization.
